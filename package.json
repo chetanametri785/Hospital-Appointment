@@ -1,0 +1,20 @@
+{
+  "name": "hospital-appointment-system",
+  "version": "1.0.0",
+  "description": "Hospital appointment booking and live status tracking portal with modern blue and white UI.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "hospital",
+    "appointment-booking",
+    "status-tracking",
+    "vscode",
+    "healthcare",
+    "medical-portal"
+  ],
+  "author": "MediCare Plus Development Team",
+  "license": "MIT"
+}

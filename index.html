@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MediCare Plus | Hospital Appointment Booking & Status Tracking</title>
+  <meta name="description" content="Book hospital doctor appointments online and track real-time appointment status, token numbers, and OPD rooms.">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%230284c7%22/><path d=%22M50 20 v60 M20 50 h60%22 stroke=%22white%22 stroke-width=%2214%22 stroke-linecap=%22round%22/></svg>">
+</head>
+<body>
+
+  <!-- =========================================================================
+       Top Bar: Quick Contact & Emergency Alert
+       ========================================================================= -->
+  <div class="top-bar">
+    <div class="container top-bar-inner">
+      <div class="top-contact-info">
+        <div class="top-contact-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+          </svg>
+          <span>Hospital Desk: <strong>+1 (800) 555-CARE</strong></span>
+        </div>
+        <div class="top-contact-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="12 6 12 12 16 14"></polyline>
+          </svg>
+          <span>OPD Hours: Mon - Sat 08:00 AM - 08:00 PM</span>
+        </div>
+      </div>
+      <div>
+        <a href="tel:+18004569111" class="emergency-pill">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="13" height="13">
+            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+            <line x1="12" y1="9" x2="12" y2="13"></line>
+            <line x1="12" y1="17" x2="12.01" y2="17"></line>
+          </svg>
+          24/7 Emergency Hotline: +1 (800) 456-9111
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       Site Header / Navigation Bar
+       ========================================================================= -->
+  <header class="site-header">
+    <div class="container navbar">
+      <a href="#home" class="brand-logo">
+        <div class="logo-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <h1>MediCare<span>Plus</span></h1>
+          <p>Super Specialty Hospital</p>
+        </div>
+      </a>
+
+      <nav>
+        <ul class="nav-links">
+          <li>
+            <a href="#home" class="nav-link active">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+              Home
+            </a>
+          </li>
+          <li>
+            <a href="#booking" class="nav-link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+              Book Appointment
+            </a>
+          </li>
+          <li>
+            <a href="#status" class="nav-link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+              Check Status
+            </a>
+          </li>
+          <li>
+            <a href="#doctors" class="nav-link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+              Doctors & Specialties
+            </a>
+          </li>
+          <li>
+            <a href="#admin" class="nav-link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+              Hospital Desk
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="#booking" class="btn btn-primary btn-sm">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+          </svg>
+          Book Now
+        </a>
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle navigation">
+          ☰
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- =========================================================================
+       Hero Section: Headline, Quick CTAs & Instant Tracker Card
+       ========================================================================= -->
+  <section class="hero-section" id="home">
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <div class="section-tag" style="background: rgba(255,255,255,0.15); color: #fff; border: 1px solid rgba(255,255,255,0.3);">
+          ✦ Trusted Healthcare Excellence
+        </div>
+        <h2>Compassionate Care, <span>Seamless Booking.</span></h2>
+        <p class="hero-subtitle">
+          Schedule appointments with top hospital specialists in under a minute, track live booking progress, token numbers, and OPD rooms in real-time.
+        </p>
+
+        <div class="hero-cta-group">
+          <a href="#booking" class="btn btn-primary btn-lg">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+            Book New Appointment
+          </a>
+          <a href="#status" class="btn btn-outline-white btn-lg">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            Track Status
+          </a>
+        </div>
+
+        <div class="hero-features-list">
+          <div class="hero-feature-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span>Verified Board Specialists</span>
+          </div>
+          <div class="hero-feature-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span>Instant Digital Token</span>
+          </div>
+          <div class="hero-feature-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span>Zero Booking Fees</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Status Search Card -->
+      <div class="hero-card">
+        <div class="hero-card-header">
+          <div class="hero-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+          </div>
+          <div>
+            <h3>Check Booking Status</h3>
+            <p>Enter Reference ID or registered phone</p>
+          </div>
+        </div>
+
+        <div class="quick-track-form">
+          <div class="quick-track-input-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+              <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+            </svg>
+            <input type="text" id="heroTrackInput" placeholder="e.g. MC-1001 or Phone..." aria-label="Appointment reference ID">
+          </div>
+
+          <div>
+            <div class="demo-chips-label">Try sample demo bookings:</div>
+            <div class="demo-chips">
+              <button class="demo-chip" data-id="MC-1001">MC-1001 (Confirmed)</button>
+              <button class="demo-chip" data-id="MC-1002">MC-1002 (Pending)</button>
+              <button class="demo-chip" data-id="MC-1003">MC-1003 (In-Progress)</button>
+            </div>
+          </div>
+
+          <button class="btn btn-primary" id="btnHeroTrack" style="width: 100%; padding: 12px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+            Track Status Live
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       Stats Banner
+       ========================================================================= -->
+  <div class="container">
+    <div class="stats-banner">
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div class="stat-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+              <circle cx="9" cy="7" r="4"></circle>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+            </svg>
+          </div>
+          <div class="stat-text">
+            <h4>25,000+</h4>
+            <p>Happy Patients Treated</p>
+          </div>
+        </div>
+
+        <div class="stat-item">
+          <div class="stat-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+            </svg>
+          </div>
+          <div class="stat-text">
+            <h4>45+</h4>
+            <p>Specialist Doctors</p>
+          </div>
+        </div>
+
+        <div class="stat-item">
+          <div class="stat-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+          </div>
+          <div class="stat-text">
+            <h4>99.4%</h4>
+            <p>On-Time Consultations</p>
+          </div>
+        </div>
+
+        <div class="stat-item">
+          <div class="stat-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+            </svg>
+          </div>
+          <div class="stat-text">
+            <h4>24 / 7</h4>
+            <p>Emergency Response</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       Booking Section (Interactive Wizard + Live Summary)
+       ========================================================================= -->
+  <section class="booking-section" id="booking">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Instant OPD Scheduling</span>
+        <h2 class="section-title">Book Your Hospital Appointment</h2>
+        <p class="section-desc">Select your medical department, pick a specialist, choose your preferred slot, and get your digital OPD token immediately.</p>
+      </div>
+
+      <div class="booking-layout">
+        <!-- Left: Multi-Step Interactive Form -->
+        <div class="booking-form-card">
+          <!-- Step Indicators -->
+          <div class="form-step-indicators">
+            <div class="step-indicator active" data-step="1">
+              <div class="step-number">1</div>
+              <div class="step-label">Patient Details</div>
+            </div>
+            <div class="step-indicator" data-step="2">
+              <div class="step-number">2</div>
+              <div class="step-label">Specialist & Dept</div>
+            </div>
+            <div class="step-indicator" data-step="3">
+              <div class="step-number">3</div>
+              <div class="step-label">Date & Time</div>
+            </div>
+          </div>
+
+          <form id="bookingFormElement">
+            <!-- STEP 1: Patient Information -->
+            <div class="form-step-content active" id="stepContent1">
+              <div class="form-group-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                Step 1: Patient Information
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="patientName">Patient Full Name <span class="required">*</span></label>
+                  <input type="text" id="patientName" class="form-control" placeholder="e.g. Johnathan Doe" required>
+                </div>
+                <div class="form-group">
+                  <label for="patientPhone">Contact Phone Number <span class="required">*</span></label>
+                  <input type="tel" id="patientPhone" class="form-control" placeholder="e.g. +1 (555) 019-2834" required>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="patientEmail">Email Address</label>
+                  <input type="email" id="patientEmail" class="form-control" placeholder="e.g. patient@email.com">
+                </div>
+                <div class="form-group">
+                  <label for="appointmentType">Consultation Type</label>
+                  <select id="appointmentType" class="form-control">
+                    <option value="In-Person Consultation">In-Person Hospital OPD</option>
+                    <option value="Teleconsultation (Video)">Teleconsultation (Online Video Call)</option>
+                    <option value="Routine Follow-up">Routine Follow-up Consultation</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-row three-col">
+                <div class="form-group">
+                  <label for="patientAge">Age (Years) <span class="required">*</span></label>
+                  <input type="number" id="patientAge" class="form-control" placeholder="e.g. 35" min="1" max="120" required>
+                </div>
+                <div class="form-group">
+                  <label for="patientGender">Gender</label>
+                  <select id="patientGender" class="form-control">
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other / Non-binary</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="patientBloodGroup">Blood Group</label>
+                  <select id="patientBloodGroup" class="form-control">
+                    <option value="O+">O Positive (O+)</option>
+                    <option value="A+">A Positive (A+)</option>
+                    <option value="B+">B Positive (B+)</option>
+                    <option value="AB+">AB Positive (AB+)</option>
+                    <option value="O-">O Negative (O-)</option>
+                    <option value="A-">A Negative (A-)</option>
+                    <option value="B-">B Negative (B-)</option>
+                    <option value="AB-">AB Negative (AB-)</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="patientSymptoms">Chief Complaint / Symptoms Description</label>
+                <textarea id="patientSymptoms" class="form-control" placeholder="Briefly describe what symptoms you are experiencing (e.g. chest discomfort, chronic headache, skin rash)..."></textarea>
+              </div>
+            </div>
+
+            <!-- STEP 2: Department & Doctor Selection -->
+            <div class="form-step-content" id="stepContent2">
+              <div class="form-group-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                Step 2: Choose Department & Specialist
+              </div>
+
+              <label style="font-weight: 700; font-size: 0.9rem; color: var(--blue-900); margin-bottom: 10px; display: block;">
+                Select Medical Specialty:
+              </label>
+              <div class="dept-selector-grid" id="deptSelectorGrid">
+                <!-- Dynamically loaded via data.js -->
+              </div>
+
+              <div id="doctorSelectionGroup" style="display: none;">
+                <label style="font-weight: 700; font-size: 0.9rem; color: var(--blue-900); margin-bottom: 10px; display: block;">
+                  Select Attending Specialist Doctor:
+                </label>
+                <div class="doctor-cards-grid" id="doctorCardsGrid">
+                  <!-- Dynamically populated -->
+                </div>
+              </div>
+            </div>
+
+            <!-- STEP 3: Date & Slot Selection -->
+            <div class="form-step-content" id="stepContent3">
+              <div class="form-group-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                Step 3: Choose Appointment Date & Time Slot
+              </div>
+
+              <div class="form-group">
+                <label for="appointmentDate">Select Preferred Consultation Date <span class="required">*</span></label>
+                <input type="date" id="appointmentDate" class="form-control" style="font-size: 1rem; padding: 12px 16px;">
+              </div>
+
+              <div class="slot-groups-container">
+                <div class="slot-period-group">
+                  <h6>🌅 Morning Slots (09:00 AM - 12:00 PM)</h6>
+                  <div class="slots-grid" id="morningSlotsGrid"></div>
+                </div>
+
+                <div class="slot-period-group">
+                  <h6>☀️ Afternoon Slots (02:00 PM - 05:00 PM)</h6>
+                  <div class="slots-grid" id="afternoonSlotsGrid"></div>
+                </div>
+
+                <div class="slot-period-group">
+                  <h6>🌆 Evening Slots (05:30 PM - 07:00 PM)</h6>
+                  <div class="slots-grid" id="eveningSlotsGrid"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Step Navigation Buttons -->
+            <div class="step-nav-buttons">
+              <button type="button" class="btn btn-secondary" id="btnPrevStep" style="visibility: hidden;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                Back
+              </button>
+
+              <button type="button" class="btn btn-primary" id="btnNextStep">
+                Continue
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              </button>
+
+              <button type="button" class="btn btn-primary" id="btnSubmitBooking" style="display: none;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                Confirm & Get Token
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Right: Live Booking Summary Sidebar -->
+        <aside class="booking-summary-card">
+          <div class="summary-header">
+            <h4>Consultation Summary</h4>
+            <p>Live preview of your booking details</p>
+          </div>
+
+          <div class="summary-body">
+            <div class="summary-item">
+              <span class="summary-label">Patient Name</span>
+              <span class="summary-val" id="sumPatientName">Patient Pending</span>
+            </div>
+
+            <div class="summary-item">
+              <span class="summary-label">Department</span>
+              <span class="summary-val" id="sumDepartment">Not selected yet</span>
+            </div>
+
+            <div class="summary-item">
+              <span class="summary-label">Specialist Doctor</span>
+              <span class="summary-val highlight-blue" id="sumDoctor">Not selected yet</span>
+            </div>
+
+            <div class="summary-item">
+              <span class="summary-label">Appointment Date</span>
+              <span class="summary-val" id="sumDate">Not chosen</span>
+            </div>
+
+            <div class="summary-item">
+              <span class="summary-label">Time Slot</span>
+              <span class="summary-val highlight-blue" id="sumSlot">Not chosen</span>
+            </div>
+
+            <div class="summary-item">
+              <span class="summary-label">Visit Type</span>
+              <span class="summary-val" id="sumType">In-Person Consultation</span>
+            </div>
+
+            <div class="summary-fee-box">
+              <div class="fee-title">Consultation Fee:</div>
+              <div class="fee-amount" id="sumFee">$0</div>
+            </div>
+
+            <div class="summary-help-callout">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="16" x2="12" y2="12"></line>
+                <line x1="12" y1="8" x2="12.01" y2="8"></line>
+              </svg>
+              <span>Token numbers are auto-assigned immediately after confirming. Free cancellation up to 2 hours prior.</span>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       Status Tracker Section
+       ========================================================================= -->
+  <section class="tracker-section" id="status">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Real-Time Healthcare Tracker</span>
+        <h2 class="section-title">Track Your Booking Status</h2>
+        <p class="section-desc">Search your appointment to check real-time confirmation, room numbers, queue token, and doctor preparation notes.</p>
+      </div>
+
+      <!-- Search Box -->
+      <div class="tracker-search-box">
+        <div class="search-input-group">
+          <input type="text" id="statusSearchInput" placeholder="Enter Appointment Reference ID (e.g. MC-1001) or Phone Number..." aria-label="Search Appointment ID">
+          <button class="btn btn-primary" id="btnSearchStatus">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            Search Status
+          </button>
+        </div>
+
+        <div class="tracker-demo-suggestions">
+          <span>Quick test appointments:</span>
+          <button class="demo-chip" data-id="MC-1001">MC-1001 (Cardiology - Confirmed)</button>
+          <button class="demo-chip" data-id="MC-1002">MC-1002 (Orthopedics - Pending)</button>
+          <button class="demo-chip" data-id="MC-1003">MC-1003 (Pediatrics - In Progress)</button>
+          <button class="demo-chip" data-id="MC-1004">MC-1004 (Dermatology - Completed)</button>
+          <button class="demo-chip" data-id="MC-1005">MC-1005 (General - Cancelled)</button>
+        </div>
+      </div>
+
+      <!-- Dynamic Result Container -->
+      <div class="tracker-result-container" id="statusResultContainer">
+        <!-- Rendered dynamically by app.js -->
+      </div>
+
+      <!-- Not Found State -->
+      <div class="tracker-empty-state" id="statusEmptyState" style="display: none;">
+        <div class="tracker-empty-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="8" x2="12" y2="12"></line>
+            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+          </svg>
+        </div>
+        <h4>No Appointment Found for "<span id="emptySearchTerm"></span>"</h4>
+        <p>Please double check your Appointment Reference ID (e.g. MC-1001) or the registered phone number. You can also book a new appointment below.</p>
+        <a href="#booking" class="btn btn-primary btn-sm">Book an Appointment</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       Hospital Admin & Reception Desk Portal
+       ========================================================================= -->
+  <section class="admin-section" id="admin">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Hospital Administration Portal</span>
+        <h2 class="section-title">Reception & OPD Operations Desk</h2>
+        <p class="section-desc">Live control center for hospital receptionists and triage nurses to confirm bookings, check-in patients, manage room allocations, and update consultation status.</p>
+      </div>
+
+      <!-- Admin KPI Counters -->
+      <div class="admin-stats-row">
+        <div class="admin-stat-card">
+          <div class="admin-stat-icon blue">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+          </div>
+          <div class="admin-stat-info">
+            <h3 id="adminCountTotal">0</h3>
+            <p>Total Bookings</p>
+          </div>
+        </div>
+
+        <div class="admin-stat-card">
+          <div class="admin-stat-icon green">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+          </div>
+          <div class="admin-stat-info">
+            <h3 id="adminCountConfirmed">0</h3>
+            <p>Confirmed Appointments</p>
+          </div>
+        </div>
+
+        <div class="admin-stat-card">
+          <div class="admin-stat-icon amber">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+          </div>
+          <div class="admin-stat-info">
+            <h3 id="adminCountPending">0</h3>
+            <p>Pending Approvals</p>
+          </div>
+        </div>
+
+        <div class="admin-stat-card">
+          <div class="admin-stat-icon indigo">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+          </div>
+          <div class="admin-stat-info">
+            <h3 id="adminCountToday">0</h3>
+            <p>Today's Consultations</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Controls & Filter Toolbar -->
+      <div class="admin-controls-card">
+        <div class="admin-filters-bar">
+          <div class="admin-filter-pills">
+            <button class="admin-filter-pill active" data-status="all">All Appointments</button>
+            <button class="admin-filter-pill" data-status="pending">Pending</button>
+            <button class="admin-filter-pill" data-status="confirmed">Confirmed</button>
+            <button class="admin-filter-pill" data-status="in-progress">In-Progress</button>
+            <button class="admin-filter-pill" data-status="completed">Completed</button>
+            <button class="admin-filter-pill" data-status="cancelled">Cancelled</button>
+          </div>
+
+          <div style="display: flex; gap: 10px; align-items: center;">
+            <div class="admin-search-wrap">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+              <input type="text" id="adminSearchInput" placeholder="Filter patient, doctor, ID..." aria-label="Filter bookings">
+            </div>
+
+            <button class="btn btn-secondary btn-sm" id="btnResetDemoData" title="Reset to sample dataset">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+              Reset Data
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Admin Table -->
+      <div class="admin-table-card">
+        <div class="admin-table-wrap">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Reference ID</th>
+                <th>Patient Details</th>
+                <th>Doctor & Dept</th>
+                <th>Date & Slot</th>
+                <th>Token</th>
+                <th>Status</th>
+                <th>Hospital Action</th>
+              </tr>
+            </thead>
+            <tbody id="adminTableBody">
+              <!-- Dynamically rendered -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       Departments & Doctors Showcase Section
+       ========================================================================= -->
+  <section class="directory-section" id="doctors">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Centers of Excellence</span>
+        <h2 class="section-title">Specialized Medical Departments</h2>
+        <p class="section-desc">Our super-specialty units combine advanced technology with renowned medical professionals.</p>
+      </div>
+
+      <div class="departments-grid" id="showcaseDeptsGrid">
+        <!-- Rendered by app.js -->
+      </div>
+
+      <div class="section-header" style="margin-top: 60px; margin-bottom: 30px;">
+        <span class="section-tag">Expert Physicians</span>
+        <h2 class="section-title">Meet Our Senior Doctors</h2>
+        <p class="section-desc">Click 'Book Consultation' on any doctor to pre-fill your appointment request.</p>
+      </div>
+
+      <div class="doctors-grid" id="showcaseDoctorsGrid">
+        <!-- Rendered by app.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       24/7 Emergency Strip
+       ========================================================================= -->
+  <div class="emergency-strip">
+    <div class="container emergency-strip-inner">
+      <div class="emergency-text">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+          <line x1="12" y1="9" x2="12" y2="13"></line>
+          <line x1="12" y1="17" x2="12.01" y2="17"></line>
+        </svg>
+        <div>
+          <h4>Emergency & Cardiac Trauma Center Open 24/7</h4>
+          <p>Immediate ambulance dispatch, ICU beds, emergency surgery, and rapid triage response.</p>
+        </div>
+      </div>
+      <div>
+        <a href="tel:+18004569111" class="btn btn-outline-white btn-lg" style="background: #fff; color: #be123c; font-weight: 800; border: none;">
+          📞 Call Emergency: +1 (800) 456-9111
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       FAQ Section
+       ========================================================================= -->
+  <section class="faq-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Frequently Asked Questions</span>
+        <h2 class="section-title">Everything You Need To Know</h2>
+        <p class="section-desc">Quick answers about our hospital booking, status verification, and consultation protocols.</p>
+      </div>
+
+      <div class="faq-accordion" id="faqAccordionContainer">
+        <!-- Dynamically rendered -->
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       Footer
+       ========================================================================= -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h3>MediCare<span>Plus</span></h3>
+          <p>
+            MediCare Plus is an internationally accredited multi-specialty healthcare institution dedicated to providing patient-centered, technology-driven clinical excellence.
+          </p>
+          <div style="display: flex; gap: 8px;">
+            <span class="badge badge-blue">ISO 9001:2020 Certified</span>
+            <span class="badge badge-blue">JCI Accredited</span>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h5>Quick Portals</h5>
+          <ul class="footer-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#booking">Book Appointment</a></li>
+            <li><a href="#status">Check Booking Status</a></li>
+            <li><a href="#doctors">Find Specialist Doctors</a></li>
+            <li><a href="#admin">Receptionist Desk</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Departments</h5>
+          <ul class="footer-links">
+            <li><a href="#booking">Cardiology & Heart Care</a></li>
+            <li><a href="#booking">Neurology & Brain Sciences</a></li>
+            <li><a href="#booking">Pediatrics & Child Health</a></li>
+            <li><a href="#booking">Orthopedics & Joint Surgery</a></li>
+            <li><a href="#booking">General & Internal Medicine</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Hospital Contact</h5>
+          <div class="footer-contact-info">
+            <div class="footer-contact-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+              <span>742 Evergreen Medical Parkway, Healthcare District, Suite 100</span>
+            </div>
+            <div class="footer-contact-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+              <span>+1 (800) 555-CARE (Reception)</span>
+            </div>
+            <div class="footer-contact-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+              <span>appointments@medicareplus.org</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 MediCare Plus Hospital Network. All rights reserved.</p>
+        <p>Built with Blue & White Medical Design for VS Code execution.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- =========================================================================
+       Modal: Booking Success & Digital Token Pass
+       ========================================================================= -->
+  <div class="modal-backdrop" id="bookingSuccessModal">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h4>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="22" height="22">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+          Appointment Confirmed!
+        </h4>
+        <button class="modal-close-btn" aria-label="Close modal">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        <div class="booking-success-box">
+          <div class="success-check-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+          </div>
+          <h3>Consultation Booked Successfully!</h3>
+          <p>Your appointment has been registered with the hospital queue. Keep your reference ID handy.</p>
+
+          <div class="apt-pass-card">
+            <div class="pass-id-row">
+              <span class="pass-id-label">Appointment Reference ID</span>
+              <span class="pass-id-val" id="modalSuccessId">MC-XXXX</span>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; font-size: 0.88rem;">
+              <div>
+                <span style="color: var(--slate-500); font-size: 0.75rem; text-transform: uppercase; font-weight: 600;">Patient Name</span><br>
+                <strong id="modalSuccessName">-</strong>
+              </div>
+              <div>
+                <span style="color: var(--slate-500); font-size: 0.75rem; text-transform: uppercase; font-weight: 600;">Queue Token</span><br>
+                <span style="background: var(--blue-600); color: #fff; padding: 2px 8px; border-radius: 4px; font-weight: 700;" id="modalSuccessToken">T-01</span>
+              </div>
+              <div>
+                <span style="color: var(--slate-500); font-size: 0.75rem; text-transform: uppercase; font-weight: 600;">Specialist Doctor</span><br>
+                <strong id="modalSuccessDoctor">-</strong>
+              </div>
+              <div>
+                <span style="color: var(--slate-500); font-size: 0.75rem; text-transform: uppercase; font-weight: 600;">Department</span><br>
+                <span id="modalSuccessDept">-</span>
+              </div>
+              <div>
+                <span style="color: var(--slate-500); font-size: 0.75rem; text-transform: uppercase; font-weight: 600;">Date & Slot</span><br>
+                <strong id="modalSuccessDateTime">-</strong>
+              </div>
+              <div>
+                <span style="color: var(--slate-500); font-size: 0.75rem; text-transform: uppercase; font-weight: 600;">Allocated Room</span><br>
+                <span id="modalSuccessCabin">-</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-secondary btn-sm" id="btnPrintFromModal">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+          Print Slip
+        </button>
+        <button class="btn btn-primary btn-sm" id="btnTrackFromModal">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          Track Live Status
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       Modal: Reschedule Appointment
+       ========================================================================= -->
+  <div class="modal-backdrop" id="rescheduleModal">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h4>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20">
+            <polyline points="23 4 23 10 17 10"></polyline>
+            <polyline points="1 20 1 14 7 14"></polyline>
+            <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+          </svg>
+          Reschedule Appointment
+        </h4>
+        <button class="modal-close-btn" aria-label="Close modal">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        <p style="color: var(--slate-600); font-size: 0.92rem; margin-bottom: 20px;">
+          Rescheduling Reference <strong id="rescheduleAptId" style="color: var(--blue-700);">MC-XXXX</strong> with <strong id="rescheduleDoctorName">Doctor</strong>.
+        </p>
+
+        <div class="form-group">
+          <label for="rescheduleDatePicker">Select New Consultation Date <span class="required">*</span></label>
+          <input type="date" id="rescheduleDatePicker" class="form-control">
+        </div>
+
+        <div class="form-group">
+          <label for="rescheduleSlotSelect">Select New Time Slot <span class="required">*</span></label>
+          <select id="rescheduleSlotSelect" class="form-control">
+            <!-- Dynamically populated -->
+          </select>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-secondary btn-sm btn-modal-cancel">Cancel</button>
+        <button class="btn btn-primary btn-sm" id="btnConfirmReschedule">Confirm Reschedule</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

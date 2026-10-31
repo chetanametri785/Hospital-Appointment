@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MediCare Plus - Website Analysis & Presentation Deck</title>
+  <style>
+    :root {
+      --blue-950: #08213b;
+      --blue-900: #0c2f55;
+      --blue-800: #144f8c;
+      --blue-600: #0284c7;
+      --blue-500: #0ea5e9;
+      --blue-400: #38bdf8;
+      --blue-100: #e0f2fe;
+      --blue-50:  #f0f7ff;
+      --white:    #ffffff;
+      --slate-800: #1e293b;
+      --slate-600: #475569;
+      --slate-500: #64748b;
+      --slate-200: #e2e8f0;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--blue-950);
+      color: var(--slate-800);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+      user-select: none;
+    }
+
+    /* Top Controls Bar */
+    .deck-topbar {
+      background: rgba(12, 47, 85, 0.85);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 12px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--white);
+      z-index: 100;
+    }
+
+    .deck-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+
+    .brand-pill {
+      background: var(--blue-600);
+      color: var(--white);
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .deck-actions {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .action-btn {
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: var(--white);
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .action-btn:hover {
+      background: var(--blue-600);
+      border-color: var(--blue-600);
+    }
+
+    /* Presentation Deck Stage */
+    .deck-stage {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 30px 20px;
+      position: relative;
+    }
+
+    /* Slide Container */
+    .slide {
+      display: none;
+      width: 100%;
+      max-width: 1050px;
+      min-height: 580px;
+      background: var(--white);
+      border-radius: 20px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+      overflow: hidden;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      animation: slideIn 0.35s ease-out;
+    }
+
+    .slide.active {
+      display: flex;
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: scale(0.98) translateY(10px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    /* Slide Header */
+    .slide-header {
+      padding: 36px 48px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      border-bottom: 1px solid var(--slate-200);
+    }
+
+    .slide-tag {
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--blue-600);
+      background: var(--blue-50);
+      padding: 4px 12px;
+      border-radius: 999px;
+      display: inline-block;
+      margin-bottom: 8px;
+    }
+
+    .slide-title {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--blue-950);
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+    }
+
+    .slide-subtitle {
+      font-size: 1rem;
+      color: var(--slate-600);
+      margin-top: 4px;
+    }
+
+    .slide-badge-num {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: var(--blue-100);
+      color: var(--blue-800);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 1.1rem;
+    }
+
+    /* Slide Body */
+    .slide-body {
+      padding: 32px 48px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    /* Slide Footer */
+    .slide-footer {
+      padding: 16px 48px;
+      background: var(--blue-50);
+      border-top: 1px solid var(--slate-200);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.85rem;
+      color: var(--slate-500);
+      font-weight: 500;
+    }
+
+    /* Slide 1: Title Hero Style */
+    .hero-slide {
+      background: linear-gradient(135deg, var(--blue-950) 0%, var(--blue-900) 60%, var(--blue-800) 100%);
+      color: var(--white);
+    }
+
+    .hero-slide .slide-header {
+      border-bottom: none;
+      padding: 48px 48px 0;
+    }
+
+    .hero-slide .slide-body {
+      padding: 40px 48px;
+      justify-content: center;
+    }
+
+    .hero-slide .slide-title {
+      color: var(--white);
+      font-size: 2.8rem;
+      margin-bottom: 12px;
+    }
+
+    .hero-slide .slide-subtitle {
+      color: var(--blue-100);
+      font-size: 1.25rem;
+      max-width: 720px;
+      line-height: 1.5;
+    }
+
+    .hero-features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 36px;
+    }
+
+    .hero-pill-card {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 12px;
+      padding: 16px;
+      backdrop-filter: blur(4px);
+    }
+
+    .hero-pill-card h5 {
+      color: var(--blue-300);
+      font-size: 0.95rem;
+      margin-bottom: 4px;
+    }
+
+    .hero-pill-card p {
+      font-size: 0.82rem;
+      color: var(--blue-100);
+    }
+
+    .hero-slide .slide-footer {
+      background: rgba(0, 0, 0, 0.25);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--blue-200);
+    }
+
+    /* Grid Layouts for Content Slides */
+    .grid-2x2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .grid-3col {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .card-feature {
+      background: var(--blue-50);
+      border: 1.5px solid var(--blue-100);
+      border-radius: 14px;
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      transition: transform 0.2s ease;
+    }
+
+    .card-feature:hover {
+      transform: translateY(-2px);
+      border-color: var(--blue-400);
+    }
+
+    .card-icon-wrap {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: var(--blue-600);
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.1rem;
+      margin-bottom: 4px;
+    }
+
+    .card-feature h4 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--blue-950);
+    }
+
+    .card-feature p {
+      font-size: 0.88rem;
+      color: var(--slate-600);
+      line-height: 1.5;
+    }
+
+    .card-feature ul {
+      margin-top: 6px;
+      padding-left: 18px;
+      font-size: 0.82rem;
+      color: var(--slate-600);
+    }
+
+    .card-feature li {
+      margin-bottom: 4px;
+    }
+
+    /* Flow Stepper for Slide 4 */
+    .stepper-flow {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .step-box {
+      flex: 1;
+      background: var(--white);
+      border: 1.5px solid var(--blue-200);
+      border-radius: 12px;
+      padding: 16px;
+      text-align: center;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    }
+
+    .step-num-badge {
+      display: inline-block;
+      width: 28px;
+      height: 28px;
+      line-height: 28px;
+      border-radius: 50%;
+      background: var(--blue-600);
+      color: var(--white);
+      font-weight: 700;
+      font-size: 0.85rem;
+      margin-bottom: 8px;
+    }
+
+    .step-box h5 {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--blue-900);
+      margin-bottom: 4px;
+    }
+
+    .step-box p {
+      font-size: 0.76rem;
+      color: var(--slate-500);
+    }
+
+    /* Thank You Slide (Slide 6) */
+    .thankyou-slide {
+      background: linear-gradient(135deg, var(--blue-900) 0%, var(--blue-950) 100%);
+      color: var(--white);
+      text-align: center;
+    }
+
+    .thankyou-slide .slide-header {
+      border: none;
+      padding: 30px;
+    }
+
+    .thankyou-slide .slide-body {
+      align-items: center;
+      justify-content: center;
+      padding: 20px 48px;
+    }
+
+    .heart-badge {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: rgba(2, 132, 199, 0.2);
+      border: 2px solid var(--blue-400);
+      color: var(--blue-400);
+      font-size: 2.4rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.08); }
+      100% { transform: scale(1); }
+    }
+
+    .thankyou-title {
+      font-size: 3rem;
+      font-weight: 900;
+      color: var(--white);
+      margin-bottom: 12px;
+      letter-spacing: -0.02em;
+    }
+
+    .thankyou-subtitle {
+      font-size: 1.2rem;
+      color: var(--blue-200);
+      max-width: 640px;
+      line-height: 1.6;
+      margin-bottom: 28px;
+    }
+
+    .thankyou-contacts {
+      display: flex;
+      gap: 24px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .contact-item-pill {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 10px 20px;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      color: var(--blue-100);
+    }
+
+    .thankyou-slide .slide-footer {
+      background: rgba(0, 0, 0, 0.3);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--blue-300);
+    }
+
+    /* Bottom Navigation Controls */
+    .deck-bottom-nav {
+      background: rgba(12, 47, 85, 0.95);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 14px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--white);
+    }
+
+    .nav-btn-group {
+      display: flex;
+      gap: 10px;
+    }
+
+    .nav-btn {
+      background: var(--blue-600);
+      color: var(--white);
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+
+    .nav-btn:disabled {
+      background: rgba(255, 255, 255, 0.15);
+      color: rgba(255, 255, 255, 0.4);
+      cursor: not-allowed;
+    }
+
+    .nav-btn:hover:not(:disabled) {
+      background: var(--blue-500);
+      transform: translateY(-1px);
+    }
+
+    .slide-dots {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.25);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .dot.active {
+      background: var(--blue-400);
+      width: 24px;
+      border-radius: 999px;
+    }
+
+    .slide-counter {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--blue-200);
+    }
+
+    @media print {
+      body {
+        background: white !important;
+      }
+      .deck-topbar, .deck-bottom-nav {
+        display: none !important;
+      }
+      .slide {
+        display: flex !important;
+        page-break-after: always;
+        box-shadow: none !important;
+        border: 1px solid #ccc;
+        margin-bottom: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <header class="deck-topbar">
+    <div class="deck-brand">
+      <span>MediCare Plus</span>
+      <span class="brand-pill">Executive PPT Deck</span>
+    </div>
+    <div class="deck-actions">
+      <a href="index.html" class="action-btn" target="_blank">
+        🌐 Open Hospital Website
+      </a>
+      <button class="action-btn" onclick="window.print()">
+        🖨️ Print / Save as PDF
+      </button>
+      <button class="action-btn" onclick="toggleFullScreen()">
+        ⛶ Fullscreen
+      </button>
+    </div>
+  </header>
+
+  <!-- Presentation Stage -->
+  <main class="deck-stage">
+
+    <!-- ==========================================
+         SLIDE 1: Title & Introduction
+         ========================================== -->
+    <div class="slide hero-slide active" data-slide="1">
+      <div class="slide-header">
+        <span class="slide-tag" style="background: rgba(255,255,255,0.15); color: #fff;">Healthcare Architecture Presentation</span>
+        <div class="slide-badge-num" style="background: rgba(255,255,255,0.15); color: #fff;">01</div>
+      </div>
+      <div class="slide-body">
+        <h1 class="slide-title">MediCare Plus Hospital Portal</h1>
+        <p class="slide-subtitle">
+          An Intelligent, Patient-Centric Web Application for Seamless Doctor Appointment Booking & Real-Time OPD Status Tracking.
+        </p>
+
+        <div class="hero-features-grid">
+          <div class="hero-pill-card">
+            <h5>📅 Multi-Step Booking</h5>
+            <p>Guided intake covering 8 specialties, doctor credentials, and auto-generated tokens.</p>
+          </div>
+          <div class="hero-pill-card">
+            <h5>🔍 Live Status Tracking</h5>
+            <p>5-stage visual progress timeline, room numbers, and patient preparation notes.</p>
+          </div>
+          <div class="hero-pill-card">
+            <h5>🎨 Blue & White Theme</h5>
+            <p>Clinical, accessible palette tailored for high-trust healthcare delivery in VS Code.</p>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>MediCare Plus • Super Specialty Hospital System</span>
+        <span>Slide 1 of 6</span>
+      </div>
+    </div>
+
+    <!-- ==========================================
+         SLIDE 2: Objective of the Website
+         ========================================== -->
+    <div class="slide" data-slide="2">
+      <div class="slide-header">
+        <div>
+          <span class="slide-tag">Mission & Problem Statement</span>
+          <h2 class="slide-title">Objectives of the MediCare Plus Portal</h2>
+          <p class="slide-subtitle">Solving traditional healthcare bottlenecks with digital transparency.</p>
+        </div>
+        <div class="slide-badge-num">02</div>
+      </div>
+      <div class="slide-body">
+        <div class="grid-2x2">
+          <div class="card-feature">
+            <div class="card-icon-wrap">1</div>
+            <h4>Eliminate Queue Congestion</h4>
+            <p>Replace chaotic physical registration counters with pre-scheduled time slots, digital queue tokens, and allocated OPD stations.</p>
+          </div>
+
+          <div class="card-feature">
+            <div class="card-icon-wrap">2</div>
+            <h4>Real-Time Status Visibility</h4>
+            <p>Empower patients and families to verify live appointment status, track desk approvals, and know exactly when their consultation starts.</p>
+          </div>
+
+          <div class="card-feature">
+            <div class="card-icon-wrap">3</div>
+            <h4>Streamlined Hospital Desk Triage</h4>
+            <p>Provide receptionists and OPD nurses with a single dashboard to confirm bookings, check-in arrivals, and prevent clinical bottlenecks.</p>
+          </div>
+
+          <div class="card-feature">
+            <div class="card-icon-wrap">4</div>
+            <h4>Empower Patient Autonomy</h4>
+            <p>Enable self-service rescheduling, seamless cancellations without penalty, and instant printing of official hospital passes.</p>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>Strategic Goals & Clinical Objectives</span>
+        <span>Slide 2 of 6</span>
+      </div>
+    </div>
+
+    <!-- ==========================================
+         SLIDE 3: Website Architecture & Core Capabilities
+         ========================================== -->
+    <div class="slide" data-slide="3">
+      <div class="slide-header">
+        <div>
+          <span class="slide-tag">System Overview</span>
+          <h2 class="slide-title">Core Architecture & Capabilities</h2>
+          <p class="slide-subtitle">A high-performance, responsive clinical portal engineered for end-to-end simplicity.</p>
+        </div>
+        <div class="slide-badge-num">03</div>
+      </div>
+      <div class="slide-body">
+        <div class="grid-3col">
+          <div class="card-feature">
+            <div class="card-icon-wrap">📝</div>
+            <h4>3-Step Booking Wizard</h4>
+            <p>Logical, guided onboarding prevents user fatigue:</p>
+            <ul>
+              <li><strong>Step 1:</strong> Patient demographic & symptom intake</li>
+              <li><strong>Step 2:</strong> Specialty & Doctor selection</li>
+              <li><strong>Step 3:</strong> Date calendar & slot selection</li>
+              <li><strong>Live Summary:</strong> Real-time fee & schedule review</li>
+            </ul>
+          </div>
+
+          <div class="card-feature">
+            <div class="card-icon-wrap">🎫</div>
+            <h4>Digital Token Engine</h4>
+            <p>Instant verification & queue assignment:</p>
+            <ul>
+              <li>Generates unique ID (e.g. <code>MC-8491</code>)</li>
+              <li>Auto-assigns Queue Token (<code>T-08</code>)</li>
+              <li>Allocates specific Cabin/Room</li>
+              <li>Provides scannable QR verification mockup</li>
+            </ul>
+          </div>
+
+          <div class="card-feature">
+            <div class="card-icon-wrap">🖥️</div>
+            <h4>Hospital Operations Desk</h4>
+            <p>Interactive administrative control panel:</p>
+            <ul>
+              <li>Live KPI metrics (Total, Confirmed, Pending)</li>
+              <li>Instant Status Toggles (Confirm / Check-In)</li>
+              <li>Department & Patient Search filters</li>
+              <li>One-click demo dataset reset</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>High-Level Architecture & Workflows</span>
+        <span>Slide 3 of 6</span>
+      </div>
+    </div>
+
+    <!-- ==========================================
+         SLIDE 4: Live Status Tracking & Key Modules
+         ========================================== -->
+    <div class="slide" data-slide="4">
+      <div class="slide-header">
+        <div>
+          <span class="slide-tag">Patient Experience</span>
+          <h2 class="slide-title">Real-Time Booking Status Tracker</h2>
+          <p class="slide-subtitle">Live 5-stage visual progress stepper keeping patients informed every step of the way.</p>
+        </div>
+        <div class="slide-badge-num">04</div>
+      </div>
+      <div class="slide-body">
+        <div class="stepper-flow">
+          <div class="step-box">
+            <div class="step-num-badge">1</div>
+            <h5>Requested</h5>
+            <p>Booked online by patient</p>
+          </div>
+          <div class="step-box">
+            <div class="step-num-badge">2</div>
+            <h5>Desk Review</h5>
+            <p>Verified by OPD staff</p>
+          </div>
+          <div class="step-box">
+            <div class="step-num-badge">3</div>
+            <h5>Confirmed</h5>
+            <p>Token & room assigned</p>
+          </div>
+          <div class="step-box">
+            <div class="step-num-badge">4</div>
+            <h5>In-Consultation</h5>
+            <p>Patient with doctor</p>
+          </div>
+          <div class="step-box">
+            <div class="step-num-badge">5</div>
+            <h5>Completed</h5>
+            <p>Prescription issued</p>
+          </div>
+        </div>
+
+        <div class="grid-2x2">
+          <div class="card-feature">
+            <h4>🔄 Self-Service Rescheduling</h4>
+            <p>Patients can change their appointment date and time slot dynamically, updating hospital queue records immediately without calling support.</p>
+          </div>
+          <div class="card-feature">
+            <h4>❌ Instant Safe Cancellation</h4>
+            <p>One-click cancellation with confirmation prompt automatically frees up consultation slots for other waiting patients.</p>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>Tracker Mechanics & Patient Autonomy</span>
+        <span>Slide 4 of 6</span>
+      </div>
+    </div>
+
+    <!-- ==========================================
+         SLIDE 5: Technical Highlights & Design System
+         ========================================== -->
+    <div class="slide" data-slide="5">
+      <div class="slide-header">
+        <div>
+          <span class="slide-tag">Engineering & Design</span>
+          <h2 class="slide-title">Technology Stack & Visual Identity</h2>
+          <p class="slide-subtitle">Clean, dependable medical software designed to run effortlessly in VS Code.</p>
+        </div>
+        <div class="slide-badge-num">05</div>
+      </div>
+      <div class="slide-body">
+        <div class="grid-2x2">
+          <div class="card-feature">
+            <h4>🎨 Blue & White Clinical Theme</h4>
+            <p>Meticulously crafted color scheme using Deep Navy (<code>#08213b</code>), Medical Sky Blue (<code>#0284c7</code>), and crisp White. Evokes calmness, precision, and sterile clinical authority.</p>
+          </div>
+
+          <div class="card-feature">
+            <h4>⚡ Zero-Dependency VS Code Execution</h4>
+            <p>Built with vanilla HTML5, modern CSS3, and ES6 JavaScript. Includes a lightweight, pure Node.js HTTP server (<code>server.js</code>) that launches in seconds without running <code>npm install</code>.</p>
+          </div>
+
+          <div class="card-feature">
+            <h4>💾 LocalStorage Persistence</h4>
+            <p>Patient bookings, status changes, and activity audit logs persist automatically in the browser. Pre-seeded with realistic sample records (<code>MC-1001</code> to <code>MC-1005</code>) for immediate demo testing.</p>
+          </div>
+
+          <div class="card-feature">
+            <h4>🖨️ Print-Ready Medical Pass</h4>
+            <p>Features dedicated <code>@media print</code> CSS styling that automatically strips navigation bars and banners, outputting a clean, professional OPD patient slip on paper or PDF.</p>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>Stack Specifications & VS Code Readiness</span>
+        <span>Slide 5 of 6</span>
+      </div>
+    </div>
+
+    <!-- ==========================================
+         SLIDE 6: Conclusion & Thank You
+         ========================================== -->
+    <div class="slide thankyou-slide" data-slide="6">
+      <div class="slide-header">
+        <span class="slide-tag" style="background: rgba(255,255,255,0.15); color: #fff;">Project Summary & Close</span>
+        <div class="slide-badge-num" style="background: rgba(255,255,255,0.15); color: #fff;">06</div>
+      </div>
+      <div class="slide-body">
+        <div class="heart-badge">🩺</div>
+        <h2 class="thankyou-title">Thank You!</h2>
+        <p class="thankyou-subtitle">
+          MediCare Plus bridges the gap between patients and specialized healthcare providers through fast, transparent, and accessible digital appointments.
+        </p>
+
+        <div class="thankyou-contacts">
+          <div class="contact-item-pill">
+            🏥 <strong>MediCare Plus Hospital</strong>
+          </div>
+          <div class="contact-item-pill">
+            📞 <strong>Emergency:</strong> +1 (800) 456-9111
+          </div>
+          <div class="contact-item-pill">
+            📧 <strong>Desk:</strong> appointments@medicareplus.org
+          </div>
+          <div class="contact-item-pill">
+            💻 <strong>Platform:</strong> VS Code & Web
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>MediCare Plus Presentation • Thank You for Your Time</span>
+        <span>Slide 6 of 6</span>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Bottom Navigation Bar -->
+  <footer class="deck-bottom-nav">
+    <div class="slide-counter">
+      Slide <span id="currentSlideNum">1</span> / 6
+    </div>
+
+    <div class="slide-dots" id="slideDots">
+      <div class="dot active" onclick="goToSlide(1)"></div>
+      <div class="dot" onclick="goToSlide(2)"></div>
+      <div class="dot" onclick="goToSlide(3)"></div>
+      <div class="dot" onclick="goToSlide(4)"></div>
+      <div class="dot" onclick="goToSlide(5)"></div>
+      <div class="dot" onclick="goToSlide(6)"></div>
+    </div>
+
+    <div class="nav-btn-group">
+      <button class="nav-btn" id="prevBtn" onclick="prevSlide()" disabled>
+        ← Previous
+      </button>
+      <button class="nav-btn" id="nextBtn" onclick="nextSlide()">
+        Next →
+      </button>
+    </div>
+  </footer>
+
+  <script>
+    let currentSlide = 1;
+    const totalSlides = 6;
+
+    function updateSlide() {
+      document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+      const activeSlide = document.querySelector(`.slide[data-slide="${currentSlide}"]`);
+      if (activeSlide) activeSlide.classList.add('active');
+
+      document.getElementById('currentSlideNum').textContent = currentSlide;
+
+      // Update Dots
+      document.querySelectorAll('.dot').forEach((dot, index) => {
+        if (index + 1 === currentSlide) {
+          dot.classList.add('active');
+        } else {
+          dot.classList.remove('active');
+        }
+      });
+
+      // Update Nav Buttons
+      document.getElementById('prevBtn').disabled = currentSlide === 1;
+      const nextBtn = document.getElementById('nextBtn');
+      if (currentSlide === totalSlides) {
+        nextBtn.innerHTML = 'Restart ↺';
+      } else {
+        nextBtn.innerHTML = 'Next →';
+      }
+    }
+
+    function nextSlide() {
+      if (currentSlide < totalSlides) {
+        currentSlide++;
+      } else {
+        currentSlide = 1;
+      }
+      updateSlide();
+    }
+
+    function prevSlide() {
+      if (currentSlide > 1) {
+        currentSlide--;
+        updateSlide();
+      }
+    }
+
+    function goToSlide(num) {
+      if (num >= 1 && num <= totalSlides) {
+        currentSlide = num;
+        updateSlide();
+      }
+    }
+
+    // Keyboard Navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === 'Space') {
+        nextSlide();
+      } else if (e.key === 'ArrowLeft') {
+        prevSlide();
+      }
+    });
+
+    // Fullscreen Toggle
+    function toggleFullScreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(() => {});
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        }
+      }
+    }
+  </script>
+</body>
+</html>
